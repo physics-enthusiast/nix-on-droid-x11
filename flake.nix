@@ -32,7 +32,7 @@
           sleep 5
           ${pkgs.x11vnc}/bin/x11vnc -display $1 -passwd test -rfbport 5902 -noshm -forever &
           ${pkgs.awesome}/bin/awesome &
-          ${pkgs.rxvt-unicode}/bin/urxvt -e env TERM=${pkgs.xterm}/bin/xterm ${pkgs.tmux}/bin/tmux &
+          ${pkgs.rxvt-unicode}/bin/urxvt -e env TERM=xterm ${pkgs.tmux}/bin/tmux &
         '';
       in
       {
