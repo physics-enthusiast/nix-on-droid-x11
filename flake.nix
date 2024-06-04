@@ -21,12 +21,12 @@
           int setuid(uid_t uid){ printf("WARNING: setuid stubbed"); return 0; }
         '';
 
-        id_so = pkgs.runCommand "id.so" { buildInputs = [ gcc ]; } ''
+        id_so = pkgs.runCommand "id.so" { buildInputs = [ pkgs.gcc ]; } ''
           mkdir -p $out
           gcc -std=c99 -shared -fPIC ${id_c} -o $out/id.so
         '';
 
-        myx = writeShellScriptBin "myx" ''
+        myx = pkgs.writeShellScriptBin "myx" ''
           export DISPLAY=$1
           LD_PRELOAD=${id_so}/id.so ${pkgs.xorg.xorgserver}/bin/Xvfb $1 -ac -listen tcp &
           sleep 5
