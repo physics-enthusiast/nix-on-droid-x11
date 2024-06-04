@@ -12,7 +12,7 @@
     {
       apps = forEachSystem (system:
       let
-        pkgs = import nixpkgs { inherit system };
+        pkgs = import nixpkgs { inherit system; };
         id_c = pkgs.writeText "id.c" ''
           #include <sys/types.h>
           #include <stdio.h>
