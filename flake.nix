@@ -28,6 +28,7 @@
 
         novnc-overriden = pkgs.novnc.overrideAttrs {
           version = "1.5.0-beta";
+          sha256 = pkgs.lib.fakeHash;
         };
 
         myx = pkgs.writeShellScriptBin "myx" ''
