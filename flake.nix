@@ -28,7 +28,12 @@
 
         novnc-overriden = pkgs.novnc.overrideAttrs {
           version = "1.5.0-beta";
-          sha256 = pkgs.lib.fakeHash;
+          src = pkgs.fetchFromGitHub {
+            owner = "novnc";
+            repo = "noVNC";
+            rev = "v1.5.0-beta";
+            sha256 = pkgs.lib.fakeHash;
+          };
         };
 
         myx = pkgs.writeShellScriptBin "myx" ''
