@@ -34,7 +34,7 @@
           exec env PATH="''${PATH:+''${PATH}:}${pkgs.dbus}/bin" ${pkgs.dbus}/bin/dbus-run-session --config-file=${pkgs.dbus}/share/dbus-1/session.conf ${pkgs.awesome}/bin/awesome &
           ${pkgs.rxvt-unicode}/bin/urxvt -e env TERM=xterm ${pkgs.tmux}/bin/tmux &
           sleep 3
-          ${pkgs.novnc}/bin/novnc --vnc localhost:5902 --listen localhost:6081 &
+          PATH="''${PATH:+''${PATH}:}${pkgs.busybox}/bin" ${pkgs.novnc}/bin/novnc --vnc localhost:5902 --listen localhost:6081 &
         '';
       in
       {
