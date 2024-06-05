@@ -26,6 +26,10 @@
           gcc -std=c99 -shared -fPIC ${id_c} -o $out/id.so
         '';
 
+        novnc-overriden = pkgs.novnc.overrideAttrs {
+          version = "1.5.0-beta";
+        };
+
         myx = pkgs.writeShellScriptBin "myx" ''
           export DISPLAY=:1
           LD_PRELOAD=${id_so}/id.so ${pkgs.xorg.xorgserver}/bin/Xvfb :1 -ac -nolisten unix -listen tcp &
@@ -34,7 +38,7 @@
           exec env PATH="''${PATH:+''${PATH}:}${pkgs.dbus}/bin" ${pkgs.dbus}/bin/dbus-run-session --config-file=${pkgs.dbus}/share/dbus-1/session.conf ${pkgs.awesome}/bin/awesome &
           ${pkgs.rxvt-unicode}/bin/urxvt -e env TERM=xterm ${pkgs.tmux}/bin/tmux &
           sleep 3
-          PATH="''${PATH:+''${PATH}:}${pkgs.busybox}/bin" ${pkgs.novnc}/bin/novnc --vnc localhost:5902 --listen localhost:6081 &
+          PATH="''${PATH:+''${PATH}:}${pkgs.busybox}/bin" ${novnc-overriden}/bin/novnc --vnc localhost:5902 --listen localhost:6081 &
         '';
       in
       {
