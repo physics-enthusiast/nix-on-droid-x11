@@ -32,7 +32,7 @@
             owner = "novnc";
             repo = "noVNC";
             rev = "v1.5.0-beta";
-            sha256 = pkgs.lib.fakeHash;
+            sha256 = "sha256-xZZCUCeJOKKjP5nJ7Hk7oRF6inFZrapIwfugJP+UBDg=";
           };
         };
 
