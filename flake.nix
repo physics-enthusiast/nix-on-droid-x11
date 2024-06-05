@@ -33,7 +33,8 @@
           ${pkgs.x11vnc}/bin/x11vnc -display :1 -passwd test -rfbport 5902 -noshm -forever &
           exec env PATH="''${PATH:+''${PATH}:}${pkgs.dbus}/bin" ${pkgs.dbus}/bin/dbus-run-session --config-file=${pkgs.dbus}/share/dbus-1/session.conf ${pkgs.awesome}/bin/awesome &
           ${pkgs.rxvt-unicode}/bin/urxvt -e env TERM=xterm ${pkgs.tmux}/bin/tmux &
-          ${pkgs.novnc}/bin/novnc_proxy --vnc localhost:5902 --listen localhost:6081 &
+          sleep 3
+          ${pkgs.novnc}/bin/novnc --vnc localhost:5902 --listen localhost:6081 &
         '';
       in
       {
