@@ -31,7 +31,7 @@
           LD_PRELOAD=${id_so}/id.so ${pkgs.xorg.xorgserver}/bin/Xvfb :1 -ac -nolisten unix -listen tcp &
           sleep 5
           ${pkgs.x11vnc}/bin/x11vnc -display :1 -passwd test -rfbport 5902 -noshm -forever &
-          ${pkgs.awesome}/bin/awesome &
+          exec ${pkgs.dbus}/bin/dbus-run-session ${pkgs.awesome}/bin/awesome &
           ${pkgs.rxvt-unicode}/bin/urxvt -e env TERM=xterm ${pkgs.tmux}/bin/tmux &
         '';
       in
