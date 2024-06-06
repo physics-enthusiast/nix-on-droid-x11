@@ -41,7 +41,8 @@
           LD_PRELOAD=${id_so}/id.so ${pkgs.xorg.xorgserver}/bin/Xvfb :1 -ac -nolisten unix -listen tcp &
           sleep 5
           ${pkgs.x11vnc}/bin/x11vnc -display :1 -passwd test -rfbport 5902 -noshm -forever &
-          exec env PATH="''${PATH:+''${PATH}:}${pkgs.dbus}/bin" ${pkgs.dbus}/bin/dbus-run-session --config-file=${pkgs.dbus}/share/dbus-1/session.conf ${pkgs.awesome}/bin/awesome &
+          #exec env PATH="''${PATH:+''${PATH}:}${pkgs.dbus}/bin" ${pkgs.dbus}/bin/dbus-run-session --config-file=${pkgs.dbus}/share/dbus-1/session.conf ${pkgs.awesome}/bin/awesome &
+          ${pkgs.plasma5Packages.kwin}/bin/kwin &
           ${pkgs.rxvt-unicode}/bin/urxvt -e env TERM=xterm ${pkgs.tmux}/bin/tmux &
           sleep 3
           PATH="''${PATH:+''${PATH}:}${pkgs.busybox}/bin" ${novnc-overriden}/bin/novnc --vnc localhost:5902 --listen localhost:6081 &
