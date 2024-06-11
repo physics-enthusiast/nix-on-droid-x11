@@ -40,9 +40,9 @@
           export DISPLAY=:1
           LD_PRELOAD=${id_so}/id.so ${pkgs.xorg.xorgserver}/bin/Xvfb :1 -ac -nolisten unix -listen tcp &
           sleep 5
-          ${pkgs.dbus}/bin/dbus-daemon --system
-          #exec env PATH="''${PATH:+''${PATH}:}${pkgs.dbus}/bin" ${pkgs.dbus}/bin/dbus-launch --config-file=${pkgs.dbus}/share/dbus-1/session.conf ${pkgs.awesome}/bin/awesome &
-          exec env QMLSCENE_DEVICE=softwarecontext PATH="''${PATH:+''${PATH}:}${pkgs.dbus}/bin:${pkgs.plasma5Packages.plasma-workspace}/bin:${pkgs.plasma5Packages.plasma-desktop}/bin:${pkgs.lib.getBin pkgs.plasma5Packages.kinit}/libexec/kf5" ${pkgs.dbus}/bin/dbus-run-session --config-file=${pkgs.dbus}/share/dbus-1/session.conf ${pkgs.plasma5Packages.plasma-workspace}/bin/startplasma-x11 &
+          ${pkgs.dbus}/bin/dbus-daemon --config-file=${pkgs.dbus}/share/dbus-1/session.conf
+          #exec env PATH="''${PATH:+''${PATH}:}${pkgs.dbus}/bin" ${pkgs.dbus}/bin/dbus-run-session --config-file=${pkgs.dbus}/share/dbus-1/session.conf ${pkgs.awesome}/bin/awesome &
+          exec env QMLSCENE_DEVICE=softwarecontext PATH="''${PATH:+''${PATH}:}${pkgs.dbus}/bin:${pkgs.plasma5Packages.plasma-workspace}/bin:${pkgs.plasma5Packages.plasma-desktop}/bin:${pkgs.lib.getBin pkgs.plasma5Packages.kinit}/libexec/kf5" ${pkgs.dbus}/bin/dbus-launch ${pkgs.plasma5Packages.plasma-workspace}/bin/startplasma-x11 &
           ${pkgs.rxvt-unicode}/bin/urxvt -e env TERM=xterm ${pkgs.tmux}/bin/tmux &
           sleep 3
           ${pkgs.x11vnc}/bin/x11vnc -display :1 -passwd test -rfbport 5902 -noshm -forever &
