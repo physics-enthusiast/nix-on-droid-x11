@@ -49,7 +49,7 @@
         '';
 
         myx-wrapped = pkgs.writeShellScriptBin "myx-wrapped" ''
-          ${pkgs.proot}/bin/proot -b ${pkgs.lib.getBin pkgs.plasma5Packages.kinit}/libexec/kf5/start_kdeinit:/run/wrappers/bin/start_kdeinit ${myx}/bin/myx
+          ${pkgs.proot}/bin/proot -0 -b ${pkgs.lib.getBin pkgs.plasma5Packages.kinit}/libexec/kf5/start_kdeinit:/run/wrappers/bin/start_kdeinit ${myx}/bin/myx
         '';
       in
       {
